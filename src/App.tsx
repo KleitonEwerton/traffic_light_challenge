@@ -2,28 +2,18 @@ import { Container } from '@mui/material'
 import './App.css'
 import { useEffect, useState } from 'react'
 
+const traficSequence = {
+  green: { nextColor: 'yellow', duration: 4000 },
+  yellow: { nextColor: 'red', duration: 1000 },
+  red: { nextColor: 'green', duration: 3000 }
+}
+
+type LightColor = keyof typeof traficSequence;
+
 function App() {
 
   const [activeLight, setActiveLight] = useState('green')
 
-  const getSetLight = (light: string, delay: number) => {
-    setTimeout(() => {
-      if (light === 'green') {
-        setActiveLight('yellow')
-        getSetLight('yellow', 1000)
-      } else if (light === 'yellow') {
-        setActiveLight('red')
-        getSetLight('red', 4000)
-      } else if (light === 'red') {
-        setActiveLight('green')
-        getSetLight('green', 3000)
-      }
-    }, delay)
-  }
-
-  useEffect(() => {
-    getSetLight('green', 4000)
-  }, [])
 
 
   return (
