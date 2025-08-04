@@ -15,6 +15,17 @@ function App() {
   const [activeLight, setActiveLight] = useState('green')
 
 
+  const getLight = (color: String, delay: number) => {
+    setTimeout(() => {
+      setActiveLight(color as LightColor)
+      getLight(traficSequence[color as LightColor].nextColor, traficSequence[color as LightColor].duration)
+    }, delay)
+
+  }
+
+  useEffect(() => {
+    getLight(activeLight, 0)
+  }, [])
 
   return (
 
